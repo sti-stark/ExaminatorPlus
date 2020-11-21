@@ -2,6 +2,7 @@
 <html lang="en">
 
 <%- include ("./partials/head.ejs") %>
+<script>require('/index.js')</script>
 
 <body>
     <main>
@@ -18,9 +19,24 @@
                 <label for="option3">Option3</label><br>
                 <input type="radio" id="option4" name="option" value="option4">
                 <label for="option4">Option4</label>
-              </form> 
+            </form>
         </div>
     </main>
+    <div>
+        <% if (tests.length > 0) { %>
+        <% tests.forEach(test => { %>
+        <b><%= test.questions %></b>
+        <ol>
+            <li><i><%= test.answer1 %></i></li>
+            <li><i><%= test.answer2 %></i></li>
+            <li><i><%= test.answer3 %></i></li>
+            <li><i><%= test.answer4 %></i></li>
+        </ol>
+        <% }) %>
+        <% } else { %>
+        <p>No se han encontrado preguntas</p>
+        <% } %>
+    </div>
 </body>
 
 </html>
