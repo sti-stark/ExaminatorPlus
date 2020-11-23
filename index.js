@@ -5,7 +5,7 @@ const app = express();
 /*----------MODEL & ROUTERS--------- */
 require('./db_examinator/mongoose');
 const testRouter = require('./routers/test');
-const Test = require('./model/test');
+const Test = require('./models/test');
 
 /*-----------PORT------------------ */
 const port = process.env.PORT
