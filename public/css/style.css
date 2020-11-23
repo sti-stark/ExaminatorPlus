@@ -6,3 +6,8 @@ h1{
 body{
     background-color:beige;
 }
+
+textarea, label, input {
+    display: inline-block;
+    margin: 16px;
+}
