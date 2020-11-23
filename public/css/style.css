@@ -8,6 +8,6 @@ body{
 }
 
 textarea, label, input {
-    display: inline-block;
+    display: block;
     margin: 16px;
 }
