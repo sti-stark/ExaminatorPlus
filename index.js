@@ -5,10 +5,10 @@ const app = express();
 /*----------MODEL & ROUTERS--------- */
 require('./db_examinator/mongoose');
 const testRouter = require('./routers/test');
-const testModels = require('./model/test');
+const Test = require('./model/test');
 
 /*-----------PORT------------------ */
-const port = process.env.PORT || 3000
+const port = process.env.PORT
 
 /*-----------APP LISTEN------------- */
 app.listen(port, () => {
@@ -32,23 +32,27 @@ app.use((req, res, next) => {
 });
 
 /*-----------RUTAS WEB-------------- */
-app.get('/', (req, res) => {
-    res.render('index.ejs');
+app.get('/', async (req, res) => {
+    try {
+        const tests = await Test.find({})
+        res.render('index.ejs', { title: 'Tests', tests: tests })
+    } catch (error) {
+        res.render('index.ejs', { title: 'Tests', tests: [] })
+    }
+
 });
 
-app.get('/quiz', async (req, res) => {
-    await testModels.find({}).then((data) => {
-        res.render('quiz', { tests: data })
-    });
+app.get('/quiz', (req, res) => {
+    res.render('quiz', { title: 'Form' })
 });
 
 
 /*------------API ROUTING------------- */
-app.use('/api',testRouter);
+app.use('/api', testRouter);
 
 /*------------ERROR-------------------*/
-app.use((req,res)=>{
-    res.status(404).render('404',{});
+app.use((req, res) => {
+    res.status(404).render('404', {});
 });
 
 
